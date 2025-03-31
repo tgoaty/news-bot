@@ -3,6 +3,8 @@ import "jsr:@std/dotenv/load";
 import { startCommand } from "./handlers/startCommand.ts";
 import { categoriesSelection } from "./handlers/categoriesSelection.ts";
 import { languageSelection } from "./handlers/languageSelection.ts";
+import { startSetting } from "./handlers/startSetting.ts";
+import { addCategory } from "./handlers/addCategory.ts";
 
 const TOKEN = Deno.env.get("BOT_TOKEN");
 
@@ -13,13 +15,15 @@ if (!TOKEN) {
 const bot = new Bot(TOKEN);
 bot.api.setMyCommands([
 	{ command: "start", description: "Start Bot" },
-	{ command: "languageSelection", description: "Choose language of news" },
-	{ command: "categoriesSelection", description: "Choose categories of news" },
+	{ command: "language_selection", description: "Choose language of news" },
+	{ command: "categories_selection", description: "Choose categories of news" },
 ]);
 bot.use(
 	startCommand(),
+	startSetting(),
 	languageSelection(),
 	categoriesSelection(),
+	addCategory(),
 );
 
 bot.start();
