@@ -1,0 +1,28 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["deno"]
+  output          = "../generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int        @id @default(autoincrement())
+  tgID       BigInt     @unique
+  lang       Language   @default("en")
+  categories Category[]
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String
+  users User[]
+}
+
+enum Language {
+  en
+  ru
+}
