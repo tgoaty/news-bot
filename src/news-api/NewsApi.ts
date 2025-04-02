@@ -1,7 +1,7 @@
 import "jsr:@std/dotenv/load";
 import { NewsApiResponse } from "../types.ts";
 
-class NewsApi {
+export class NewsApi {
 	static url = "https://newsapi.org";
 	static key = Deno.env.get("NEWS_API_KEY");
 
@@ -12,7 +12,7 @@ class NewsApi {
 		options["apiKey"] = this.key;
 
 		const params = new URLSearchParams(options);
-		const url = `${this.url}?${params}`;
+		const url = `${this.url}/v2/top-headlines?${params}`;
 
 		const response = await fetch(url);
 

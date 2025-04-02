@@ -13,6 +13,7 @@ model User {
   id         Int        @id @default(autoincrement())
   tgID       BigInt     @unique
   lang       Language   @default("en")
+  frequency  Int        @default(2)
   categories Category[]
 }
 
